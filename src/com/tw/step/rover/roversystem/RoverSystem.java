@@ -21,6 +21,6 @@ public class RoverSystem {
 
     @Override
     public String toString() {
-        return rover.toString();
+        return String.format("%s " ,rover.toString());
     }
 }

@@ -34,4 +34,8 @@ public class LiveRoverState implements RoverState {
         return this;
     }
 
+    @Override
+    public Status getStatus() {
+        return Status.LIVE;
+    }
 }

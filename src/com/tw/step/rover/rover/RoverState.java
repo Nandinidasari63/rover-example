@@ -9,4 +9,6 @@ public interface RoverState {
     RoverState turnRight(Navigator navigator, Boundary boundary);
 
     RoverState move(Navigator navigator, Boundary boundary);
+
+     Status getStatus();
 }
