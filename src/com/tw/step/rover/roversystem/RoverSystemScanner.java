@@ -34,7 +34,6 @@ public class RoverSystemScanner {
     public static RoverSystemScanner from(String input) {
         String[] tokens = input.split("[\n\t ]+");
         for (String token : tokens) {
-            System.out.println(token);
         }
         return new RoverSystemScanner(tokens);
     }

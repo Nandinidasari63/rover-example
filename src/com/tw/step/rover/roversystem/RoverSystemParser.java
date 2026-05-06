@@ -1,7 +1,6 @@
 package com.tw.step.rover.roversystem;
 
 import com.tw.step.rover.boundary.Boundary;
-import com.tw.step.rover.boundary.Plateau;
 import com.tw.step.rover.commands.CommandCreator;
 import com.tw.step.rover.commands.RoverCommand;
 import com.tw.step.rover.commands.RoverCommands;
@@ -13,11 +12,13 @@ import com.tw.step.rover.rover.Rover;
 public class RoverSystemParser {
     private final RoverSystemScanner scanner;
     private final Navigator navigator;
+    private final Boundary boundary;
     private final CommandCreator commandCreator;
 
-    public RoverSystemParser(RoverSystemScanner scanner, Navigator navigator,CommandCreator commandCreator) {
+    public RoverSystemParser(RoverSystemScanner scanner, Navigator navigator, Boundary boundary, CommandCreator commandCreator) {
         this.scanner = scanner;
         this.navigator = navigator;
+        this.boundary = boundary;
         this.commandCreator = commandCreator;
     }
 
@@ -27,21 +28,16 @@ public class RoverSystemParser {
         return new Rover(coordinate, heading);
     }
 
-    private Plateau parsePlateau() {
-        return  scanner.scanPlateau();
-    }
-
     public RoverSystem parse() {
         RoverSystem roverSystem = new RoverSystem();
-        Boundary boundary = parsePlateau();
         Rover rover = parseRover();
         roverSystem.addRover(rover);
-        RoverCommands roverCommands = parseRoverCommands(boundary);
+        RoverCommands roverCommands = parseRoverCommands();
         roverSystem.addCommands(roverCommands);
         return roverSystem;
     }
 
-    private RoverCommands parseRoverCommands(Boundary boundary) {
+    private RoverCommands parseRoverCommands() {
         RoverCommands roverCommands = new RoverCommands();
         String instructions = scanner.consume();
         for (int i = 0; i < instructions.length(); i++) {

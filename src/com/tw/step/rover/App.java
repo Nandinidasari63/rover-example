@@ -18,8 +18,9 @@ LFFRFLFFFR
 
         RoverSystemScanner scanner = RoverSystemScanner.from(text);
         Navigator navigator = Navigator.create();
+        Boundary boundary = scanner.scanPlateau();
         CommandCreator commandCreator = new CommandCreator();
-        RoverSystemParser roverSystemParser = new RoverSystemParser(scanner, navigator, commandCreator);
+        RoverSystemParser roverSystemParser = new RoverSystemParser(scanner, navigator, boundary, commandCreator);
         RoverSystem system = roverSystemParser.parse();
         system.execute();
         System.out.println(system);
